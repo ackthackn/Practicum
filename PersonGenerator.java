@@ -1,32 +1,61 @@
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
 public class PersonGenerator {
     public static void main(String[] args) {
 
-        String ID = " ";
-        String fName = " ";
-        String lName = " ";
-        String title = " ";
-        int YOB = 0;
+        String ID;
+        String fName;
+        String lName;
+        String title;
+        int YOB;
+        boolean add = true;
+        String yesNo;
+        try {
+            Scanner scanner = new Scanner(System.in);
 
-        Scanner scanner = new Scanner(System.in);
+            ArrayList<String> records = new ArrayList<>();
 
-        ArrayList<String> records = new ArrayList<>();
+            ID = SafeInput.getNonZeroLenString(scanner, "Enter ID");
+            fName = SafeInput.getNonZeroLenString(scanner, "Enter First Name");
+            lName = SafeInput.getNonZeroLenString(scanner, "Enter Last Name");
+            title = SafeInput.getNonZeroLenString(scanner, "Enter Title");
+            YOB = SafeInput.getInt(scanner, "Enter Year of Birth");
+
+            records.add(ID + ", " + fName + ", " + lName + ", " + title + ", " + YOB);
 
 
-        //fName = SafeInput.getNonZeroLenString(scanner, "Enter First Name");
-        //lName = SafeInput.getNonZeroLenString(scanner, "Enter Last Name");
-        //title = SafeInput.getNonZeroLenString(scanner, "Enter Title");
-        //YOB = SafeInput.getInt(scanner, "Enter Year of Birth");
+            while (add) {
+                System.out.print("Add another record? Y/N ");
+                yesNo = scanner.nextLine();
 
-        ID = SafeInput.getNonZeroLenString(scanner, "Enter ID");
+                if (yesNo.equalsIgnoreCase("Y")) {
+                    ID = SafeInput.getNonZeroLenString(scanner, "Enter ID");
+                    fName = SafeInput.getNonZeroLenString(scanner, "Enter First Name");
+                    lName = SafeInput.getNonZeroLenString(scanner, "Enter Last Name");
+                    title = SafeInput.getNonZeroLenString(scanner, "Enter Title");
+                    YOB = SafeInput.getInt(scanner, "Enter Year of Birth");
 
-        records.add(ID);
-        System.out.println(records);
+                    records.add(ID + ", " + fName + ", " + lName + ", " + title + ", " + YOB);
+                } else if (yesNo.equalsIgnoreCase("N")) {
+                    add = false;
+                    System.out.println(records);
+                } else {
+                    System.out.println("Invalid answer, answer with Y/N");
+                }
+            }
 
-        //File file = new File("PersonTestData.txt");
+            FileWriter file = new FileWriter("PersonTestData.txt");
+
+            for(String str: records){
+                file.write(str + "\n");
+            }
+            file.close();
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
