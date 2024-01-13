@@ -30,8 +30,7 @@ public class ProductReader {
                 buffer.close();
                 fileReader.close();
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
