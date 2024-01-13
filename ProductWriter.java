@@ -2,14 +2,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class PersonGenerator {
+public class ProductWriter {
     public static void main(String[] args) {
 
         String ID;
-        String fName;
-        String lName;
-        String title;
-        int YOB;
+        String Name;
+        String Description;
+        Double Cost;
         boolean add = true;
         String yesNo;
         try {
@@ -18,12 +17,11 @@ public class PersonGenerator {
             ArrayList<String> records = new ArrayList<>();
 
             ID = SafeInput.getNonZeroLenString(scanner, "Enter ID");
-            fName = SafeInput.getNonZeroLenString(scanner, "Enter First Name");
-            lName = SafeInput.getNonZeroLenString(scanner, "Enter Last Name");
-            title = SafeInput.getNonZeroLenString(scanner, "Enter Title");
-            YOB = SafeInput.getInt(scanner, "Enter Year of Birth");
+            Name = SafeInput.getNonZeroLenString(scanner, "Enter Name");
+            Description = SafeInput.getNonZeroLenString(scanner, "Enter Description");
+            Cost = SafeInput.getDouble(scanner, "Enter Cost");
 
-            records.add(ID + ", " + fName + ", " + lName + ", " + title + ", " + YOB);
+            records.add(ID + ", " + Name + ", " + Description + ", " + Cost);
 
 
             while (add) {
@@ -32,12 +30,11 @@ public class PersonGenerator {
 
                 if (yesNo.equalsIgnoreCase("Y")) {
                     ID = SafeInput.getNonZeroLenString(scanner, "Enter ID");
-                    fName = SafeInput.getNonZeroLenString(scanner, "Enter First Name");
-                    lName = SafeInput.getNonZeroLenString(scanner, "Enter Last Name");
-                    title = SafeInput.getNonZeroLenString(scanner, "Enter Title");
-                    YOB = SafeInput.getInt(scanner, "Enter Year of Birth");
+                    Name = SafeInput.getNonZeroLenString(scanner, "Enter Name");
+                    Description = SafeInput.getNonZeroLenString(scanner, "Enter Description");
+                    Cost = SafeInput.getDouble(scanner, "Enter Cost");
 
-                    records.add(ID + ", " + fName + ", " + lName + ", " + title + ", " + YOB);
+                    records.add(ID + ", " + Name + ", " + Description + ", " + Cost);
                 } else if (yesNo.equalsIgnoreCase("N")) {
                     add = false;
                 } else {
@@ -45,7 +42,7 @@ public class PersonGenerator {
                 }
             }
 
-            FileWriter file = new FileWriter("PersonTestData.txt");
+            FileWriter file = new FileWriter("ProductTestData.txt");
 
             for(String str: records){
                 file.write(str + "\n");
